@@ -1,0 +1,3 @@
+Functions attempted: 5079
+Functions decompiled: 5075
+Language: ARM:LE:32:v8
