@@ -1,0 +1,67 @@
+[
+  {
+    "mode": 0,
+    "size": [
+      2560,
+      1440
+    ],
+    "mean_absolute_rgb_difference": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "changed_channel_fraction": 0.0
+  },
+  {
+    "mode": 1,
+    "size": [
+      2560,
+      1440
+    ],
+    "mean_absolute_rgb_difference": [
+      0.033706597222222225,
+      0.01977105034722222,
+      0.03364474826388889
+    ],
+    "changed_channel_fraction": 0.022448549623842573
+  },
+  {
+    "mode": 2,
+    "size": [
+      2560,
+      1440
+    ],
+    "mean_absolute_rgb_difference": [
+      0.08661159939236111,
+      0.07114881727430555,
+      0.09066162109375
+    ],
+    "changed_channel_fraction": 0.06478524667245367
+  },
+  {
+    "mode": 3,
+    "size": [
+      2560,
+      1440
+    ],
+    "mean_absolute_rgb_difference": [
+      7.910821668836806,
+      7.050083821614583,
+      7.206399197048611
+    ],
+    "changed_channel_fraction": 0.5414159252025463
+  },
+  {
+    "mode": 4,
+    "size": [
+      2560,
+      1440
+    ],
+    "mean_absolute_rgb_difference": [
+      6.72501708984375,
+      6.04498291015625,
+      6.142290852864583
+    ],
+    "changed_channel_fraction": 0.4871119972511574
+  }
+]

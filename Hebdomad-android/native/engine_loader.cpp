@@ -12,6 +12,8 @@
 #include <android/log.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <errno.h>
+#include <algorithm>
 
 static std::vector<unsigned char> image;
 static FILE *log_file;
@@ -72,13 +74,22 @@ bool load_engine(const char *path) {
     for(unsigned i=0;i<eh->e_phnum;++i)if(ph[i].p_type==PT_LOAD) {
         uintptr_t start=ph[i].p_vaddr&~4095u;
         uintptr_t end=(ph[i].p_vaddr+ph[i].p_memsz+4095u)&~4095u;
+        // Native bridges reserve 0x10000..0x12000 for their own dispatch data.
+        // The first executable section starts at 0x143ec. ELF headers and
+        // dynamic symbols below it are read from image, never executed.
+        if(start==0x10000)start=0x12000;
         // Without MAP_FIXED: never replace mappings that belong to Android.
         void *mapped=mmap(reinterpret_cast<void*>(start),end-start,PROT_READ|PROT_WRITE,MAP_PRIVATE|MAP_ANONYMOUS,-1,0);
         if(mapped!=reinterpret_cast<void*>(start)) {
             if(mapped!=MAP_FAILED)munmap(mapped,end-start);
-            port_log("Could not reserve engine address %08x",static_cast<unsigned>(start));return false;
+            port_log("Could not reserve engine address %08x (returned %p, errno=%d: %s)",static_cast<unsigned>(start),mapped,errno,strerror(errno));
+            FILE *maps=fopen("/proc/self/maps","r");
+            if(maps){char line[512];for(int n=0;n<12&&fgets(line,sizeof line,maps);++n)port_log("Mapping: %s",line);fclose(maps);}
+            return false;
         }
-        memcpy(reinterpret_cast<void*>(ph[i].p_vaddr),image.data()+ph[i].p_offset,ph[i].p_filesz);
+        uintptr_t copy_start=std::max(start,static_cast<uintptr_t>(ph[i].p_vaddr));
+        size_t skipped=copy_start-ph[i].p_vaddr;
+        memcpy(reinterpret_cast<void*>(copy_start),image.data()+ph[i].p_offset+skipped,ph[i].p_filesz-skipped);
         port_log("Mapped engine %08x..%08x",static_cast<unsigned>(start),static_cast<unsigned>(end));
     }
     const auto *sh=reinterpret_cast<const Elf32_Shdr*>(image.data()+eh->e_shoff);
@@ -91,8 +102,8 @@ bool load_engine(const char *path) {
     }
     if(!ok)return false;
     if(!install_platform_hooks())return false;
-    __builtin___clear_cache(reinterpret_cast<char*>(0x10000),reinterpret_cast<char*>(0x3cb000));
-    if(mprotect(reinterpret_cast<void*>(0x10000),0x3bb000,PROT_READ|PROT_EXEC)!=0){
+    __builtin___clear_cache(reinterpret_cast<char*>(0x12000),reinterpret_cast<char*>(0x3cb000));
+    if(mprotect(reinterpret_cast<void*>(0x12000),0x3b9000,PROT_READ|PROT_EXEC)!=0){
         port_log("Cannot protect game code as executable");return false;
     }
     return true;

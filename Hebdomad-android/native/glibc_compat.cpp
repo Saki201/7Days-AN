@@ -123,6 +123,7 @@ static const char *aliases[][2]={
 };
 #define MAP(n,f) if(!strcmp(name,n))return reinterpret_cast<void*>(f)
 void *compat_symbol(const char *name) {
+    if(!strcmp(name,"glViewport"))return reinterpret_cast<void*>(port_gl_viewport);
     if(!strncmp(name,"_ITM_",5)||!strncmp(name,"_ZGTt",5)||!strcmp(name,"__gmon_start__"))return nullptr;
     MAP("environ",&environ);MAP("_environ",&environ);MAP("__environ",&environ);
     MAP("stdin",&compat_stdin);MAP("stderr",&compat_stderr);

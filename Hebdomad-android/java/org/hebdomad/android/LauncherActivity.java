@@ -18,7 +18,7 @@ public final class LauncherActivity extends Activity {
         setContentView(status);
         new Thread(new Runnable(){public void run(){
             try {
-                prepare("res.spk",51984563L,"37b0b7645b80c8b55ff8e9aebe7d7ff1069a82a3d5ee1d2d84ac3d27b4448b02");
+                prepare("res.spk",51798123L,"501dac61d826dd5587c7a12f50590e62167592bff89897ed44bdf5b19ccb5435");
                 prepare("engine.arm",3976092L,"2d4833b0203ad4b3285ae2757e3a1fee0981976051666539c1ef27155e10117d");
                 runOnUiThread(new Runnable(){public void run(){startActivity(new Intent(LauncherActivity.this,GameActivity.class));finish();}});
             } catch(final Exception e){runOnUiThread(new Runnable(){public void run(){status.setText("游戏数据准备失败\n"+e.getMessage());}});}

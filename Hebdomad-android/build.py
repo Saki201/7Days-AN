@@ -21,6 +21,7 @@ def run(args):
     subprocess.run([str(x) for x in args],check=True,cwd=ROOT)
 
 def main():
+    run([__import__('sys').executable,ROOT/'prepare_shaders.py'])
     for name in ['classes','dex','aar','native']:(BUILD/name).mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(ROOT/'third_party/SDL3-3.4.20.aar') as archive:archive.extractall(BUILD/'aar')
     sdl=BUILD/'aar/prefab/modules/SDL3-shared/libs/android.armeabi-v7a/libSDL3.so'
@@ -44,7 +45,7 @@ def main():
          '--lib',ANDROID,'--output',BUILD/'dex',classes,BUILD/'aar/classes.jar'])
     unsigned=BUILD/'unsigned.apk'
     run([TOOLS/'aapt.exe','package','-f','-M',ROOT/'AndroidManifest.xml','-I',ANDROID,
-         '-A',ROOT/'assets','-F',unsigned])
+         '-S',ROOT/'res','-A',ROOT/'assets','-F',unsigned])
     with zipfile.ZipFile(unsigned,'a',zipfile.ZIP_STORED) as archive:
         archive.write(BUILD/'dex/classes.dex','classes.dex')
         for file in (ROOT/'libs').rglob('*.so'):archive.write(file,'lib/'+file.relative_to(ROOT/'libs').as_posix())
