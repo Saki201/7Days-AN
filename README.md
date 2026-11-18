@@ -68,7 +68,7 @@
 
 | 主菜单 | 地图 | 物品栏 |
 |---|---|---|
-| ![主菜单](Hebdomad-android/validation/v0.8-clean-icon.png) | ![地图](https://github.com/afeimod/7Days-AN/blob/main/Screenshot_2026-11-18-12-26-25-732_org.hebdomad.android.jpg) | ![物品栏](https://github.com/afeimod/7Days-AN/blob/main/Screenshot_2026-11-18-12-26-33-446_org.hebdomad.android.jpg) |
+| ![主菜单](Hebdomad-android/validation/v0.8-clean-icon.png) | ![地图](https://github.com/afeimod/7Days-AN/blob/main/Screenshot_2026-11-18-12-26-33-446_org.hebdomad.android.jpg) | ![物品栏](https://github.com/afeimod/7Days-AN/blob/main/Screenshot_2026-11-18-12-26-25-732_org.hebdomad.android.jpg) |
 
 ## 从源码构建
 
