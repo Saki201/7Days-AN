@@ -6,7 +6,7 @@
 
 塞班时代 3D 冒险名作《七夜》的安卓原生复刻。不是模拟器，不是 CPU 转译——通过逆向分析重写平台接口，让原版 ARM 引擎二进制直接运行在 Android 上。
 
-![v0.8 运行画面](Hebdomad-android/validation/v0.8-clean-icon.png)
+![v0.8 运行画面](https://github.com/afeimod/7Days-AN/blob/main/Screenshot_2026-11-18-12-26-21-991_org.hebdomad.android.jpg)
 
 ## 这是什么
 
@@ -68,7 +68,7 @@
 
 | 主菜单 | 地图 | 物品栏 |
 |---|---|---|
-| ![主菜单](Hebdomad-android/validation/01-main-menu.png) | ![地图](Hebdomad-android/validation/04-map.png) | ![物品栏](Hebdomad-android/validation/05-inventory.png) |
+| ![主菜单](Hebdomad-android/validation/v0.8-clean-icon.png) | ![地图](https://github.com/afeimod/7Days-AN/blob/main/Screenshot_2026-11-18-12-26-25-732_org.hebdomad.android.jpg) | ![物品栏](https://github.com/afeimod/7Days-AN/blob/main/Screenshot_2026-11-18-12-26-33-446_org.hebdomad.android.jpg) |
 
 ## 从源码构建
 
